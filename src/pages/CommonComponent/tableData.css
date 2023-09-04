@@ -1,0 +1,40 @@
+.react-datepicker__input-container input{
+    width: 100% !important; 
+    border: none !important;
+    border-bottom: 1px solid !important;
+}
+.react-datepicker__input-container input:focus-visible{
+   outline: none !important;
+}
+.filterIcon{
+    border: none;
+    background-color: #008b8b00;
+} 
+.FlexCol{
+    display: flex;
+    flex-direction: column;
+}
+.FlexBt{
+    display: flex;
+    justify-content: space-between;
+}
+.relative{
+    position: relative;
+    
+}
+.absolute{
+    position: absolute;
+}
+.autoSelect{
+    position: absolute;
+    background-color: aliceblue;
+    width: 100%;
+}
+
+.curser{
+    cursor: pointer;
+}
+.ActionButtonDiv{
+    height: min-content; display: flex;
+    justify-content: space-between;gap: 2rem;
+}
