@@ -245,8 +245,7 @@ const CommonTable = ({
     } else {
       setModal(true)
     }
-  }
-  console.log("autoSuggetion", autoSuggetion)
+  } 
   return (
     <>
       <CardBody>

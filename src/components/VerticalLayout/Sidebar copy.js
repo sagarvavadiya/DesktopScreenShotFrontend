@@ -36,7 +36,6 @@ const Sidebar = props => {
   const [timestamp, setTimestamp] = useState()
   const [start, setStart] = useState(localStorage.getItem("start"))
   const [coords, setCoords] = useState({ x: 0, y: 0 })
-  const [activeScreen, setActiveScreen] = useState("")
 
   useEffect(() => {
     const handleWindowMouseMove = event => {
@@ -45,6 +44,7 @@ const Sidebar = props => {
 
       setCoords(event.clientX)
     }
+
 
     window.addEventListener("mousemove", handleWindowMouseMove)
 
@@ -103,16 +103,13 @@ const Sidebar = props => {
     return file
   }
 
-
-
   // Call the function to start recording
   const TakeScreenShot = async event => {
-    console.log(123)
     await axios
       .get("http://localhost:5020", {})
       .then(response => {
-        localStorage.setItem("bufferImg", response.data.image)
-        setTimestamp(new Date().getTime())
+        localStorage.setItem("bufferImg", response.data.image),
+          setTimestamp(new Date().getTime())
         switch (screen) {
           case "all":
             setScreenShot(response.data.image)
@@ -120,26 +117,8 @@ const Sidebar = props => {
             break
           case "active":
             coort.x < 15
-            console.log("response.data.image", response.data.image)
-            const ActiveScreenIndex = axios.get(
-              "http://127.0.0.1:8000/ActiveScreenIndex",
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  "Access-Control-Allow-Origin": "*",
-                },
-              }
-            )
-            ActiveScreenIndex.then(data => {
-              console.log("activeScreen", )
-              setScreenShot([
-                response.data.image[
-                  +data.data.Active_Screen_Index
-                ],
-              ])
-            })
-
-         
+              ? setScreenShot([response.data.image[1]])
+              : setScreenShot([response.data.image[0]])
             break
           default:
             coort.x < 15
@@ -194,12 +173,13 @@ const Sidebar = props => {
     setMemo(e.target.value)
     localStorage.setItem("memo", e.target.value)
   }
-
-  // ------------------------------------------------------------------===============================---------------------
+  useEffect(() => {
+    console.log(coort.x)
+  }, [coords])
 
   return (
     <React.Fragment>
-      <div className="vertical-menu ">
+      <div className="vertical-menu">
         <div className="navbar-brand-box">
           {/* <Link to="/" className="logo logo-dark">
             <span className="logo-sm">
